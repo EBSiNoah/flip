@@ -7,15 +7,15 @@ using namespace std;
 
 int compare(int a, int b)
 {
-	int f[2]={b,b};
-	f[-1]=a;
+	int f[3]={a,b,b};
+	
 	int k=a-b;
 	while((k!=1 && k!=-1)&& k!=0)
 	{
 		k/=2;
 	}
 //	cout<<k<<", "<<f[-1]<<", "<<f[k]<<endl;
-	return f[k];
+	return f[k+1];
 }
 
 vector<int> flip(vector<int> arr)

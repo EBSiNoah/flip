@@ -136,6 +136,121 @@ def flip04A01(arr):
     print(count, len(newarr))
     return compare(count,len(newarr)-count)
 
+def flip05(arr):
+    mat=[[0,0],[0,1],[1,0],[1,1]]
+    restore=[]
+    pattern=[]
+    value=0
+    variousU=0
+    variousD=0
+    idx=0
+    size=len(arr)
+    for j in arr:
+        value += j
+    
+    for i in range(1,size):
+        idx=0
+        restore.clear()
+        restore.append(arr[i-1])
+        restore.append(arr[i])
+        while(restore != mat[idx]):
+            idx += 1
+        if(idx == 1):
+            pattern.append('u')
+        elif(idx == 2):
+            pattern.append('d')
+    
+    for k in pattern:
+        if(k == 'u'):
+            variousU += 1
+        else:
+            variousD += 1
+    
+    if(value >= size-value):
+        return variousU
+    else:
+        return variousD
+
+def flip05A(arr):
+    mat=[[0,0],[0,1],[1,0],[1,1]]
+    restore=[]
+    pattern=[]
+    value=0
+    variousU=0
+    variousD=0
+    idx=0
+    size=len(arr)
+    for j in arr:
+        value += j
+    
+    for i in range(1,size):
+        idx=0
+        restore.clear()
+        restore.append(arr[i-1])
+        restore.append(arr[i])
+        while(restore != mat[idx]):
+            idx += 1
+        if(idx == 1):
+            pattern.append('u')
+        elif(idx == 2):
+            pattern.append('d')
+    
+    for k in pattern:
+        if(k == 'u'):
+            variousU += 1
+        else:
+            variousD += 1
+    
+    if(value >= size-value):
+        if(variousU == 0):
+            return variousD
+        return variousU
+    else:
+        if(variousD == 0):
+            return variousU
+        return variousD
+
+def flip05A01(arr):
+    mat=[[0,0],[0,1],[1,0],[1,1]]
+    restore=[]
+    pattern=[]
+    value=0
+    variousU=0
+    variousD=0
+    idx=0
+    size=len(arr)
+    for j in arr:
+        value += j
+    
+    for i in range(1,size):
+        idx=0
+        restore.clear()
+        restore.append(arr[i-1])
+        restore.append(arr[i])
+        while(restore != mat[idx]):
+            idx += 1
+        if(idx == 1):
+            pattern.append('u')
+        elif(idx == 2):
+            pattern.append('d')
+    
+    for k in pattern:
+        if(k == 'u'):
+            variousU += 1
+        else:
+            variousD += 1
+    
+    if(value >= size-value):
+        if(variousU == 0):
+            return variousD
+        if(arr[0]==1):
+            variousU += 1
+        return variousU
+    else:
+        if(variousD == 0):
+            return variousU
+        return variousD
+
 def fliptest():
     # print(flip04A01([0,0,1,1,1,0,0,0,0,1,1,1,1,1,0]))
     arr=[0,0,0,1,1,0,0]
@@ -160,8 +275,15 @@ def fliptest02():
     
     print(flip04A01(arr))
 
+def fliptest03():
+    intable=[1,0,0,1,1,0,1,0,1,1,1,0]
+    output=0
+    output=flip05A(intable)
+    print(output)
+    
+
 def main():
-    fliptest02()
+    fliptest03()
 
 if(__name__=="__main__"):
     main()
