@@ -47,6 +47,83 @@ vector<int> flip(vector<int> arr)
 	return newarr;
 }
 
+vector< vector<int> > init()
+{
+	vector< vector<int> > output;
+	vector<int> col;
+
+	col.push_back(0);
+	col.push_back(0);
+	output.push_back(col);
+	col.clear();
+	
+	col.push_back(0);
+	col.push_back(1);
+	output.push_back(col);
+	col.clear();
+	
+	col.push_back(1);
+	col.push_back(0);
+	output.push_back(col);
+	col.clear();
+	
+	col.push_back(1);
+	col.push_back(1);
+	output.push_back(col);
+	col.clear();
+	
+	return output;
+}
+
+int flip02(vector<int> input)
+{
+	vector< vector<int> > mat=init();
+	vector<int> restore;
+	vector<int> pattern;
+	vector<int> inpat;
+	vector<int> various;
+	vector<int>::iterator itr;
+	vector< vector<int> >::iterator row;
+	int value=0;
+	int idx=0;
+	int len=input.size();
+	int i=1;
+	int k=0;
+	
+	for(k=0;k<4;++k)
+	{
+		inpat.push_back(k);
+		various.push_back(0);
+	}
+	
+	for(itr=input.begin();itr!=input.end();++itr)
+	{
+		value += *itr;
+	}
+	
+	for(i=1,itr=input.begin(),row=mat.begin();i<len;++i)
+	{
+		idx=0;
+		restore.clear();
+		restore.push_back(*(itr+i-1));
+		restore.push_back(*(itr+i));
+		while(*(row+idx) != restore)
+		{
+			++idx;
+		}
+		pattern.push_back(*(inpat.begin()+idx));
+	}
+	
+	for(itr=pattern.begin();itr!=pattern.end();++itr)
+	{
+		++*(various.begin()+*itr);
+	}
+	
+	itr=various.begin();
+	
+	return *(itr+1+*input.begin());
+}
+
 void fliptest(void)
 {
 	vector<int> arr;
@@ -102,9 +179,25 @@ void fliptest02(void)
 	newarr=flip(arr);
 }
 
+void fliptest03(void)
+{
+	vector<int> arr;
+	int idx=0;
+	string str;
+	
+	cin>>str;
+
+	for(idx=0;idx<str.size();++idx)
+	{
+		arr.push_back(static_cast<int>( str[idx]&1 ) );
+	}
+	
+	cout<<flip02(arr)<<endl;
+}
+
 int main(void)
 {
-	fliptest02();
+	fliptest03();
 	
 	return 0;
 }
